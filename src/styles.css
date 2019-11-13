@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Generales */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Layout */
+
+.back {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right, #141e30, #243b55);
+}
+
+.waves {
+    width: 100%;
+    height: 100vh;
+    background-image: url('./assets/bg-pattern.8cfe4242.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
