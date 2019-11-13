@@ -52,7 +52,39 @@ h1 {
     align-items: center;
 }
 
+.col-100.title {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.col-100.title p {
+    font-size: 2.5em;
+}
+
+.col-100.title p span {
+    font-size: 0.6em;
+}
+
 /* Botones */
+
+button {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 0.3em;
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+    padding: 0.5em 1em;
+    transition: all 400ms ease-in-out;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: #141e30;
+    border: 1px solid #141e30;
+}
 
 .jumbo {
     margin: 1em;

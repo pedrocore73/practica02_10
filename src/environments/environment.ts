@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlEquipo: 'http://localhost:8080/equipo'
+  urlEquipo: 'http://localhost:8080/equipo',
+  urlUsoCpu: 'http://localhost:8080/usocpu',
 };
 
 /*
