@@ -6,5 +6,13 @@
                 <button routerLink="/">Volver</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col-30">
+                <div class="grafico" *ngIf="chartLastUsoCpu">
+                    <p>% Uso CPU actual</p>
+                    <canvas style="width: 1000px; height: 1000px" id="grafico1">{{chartLastUsoCpu}}</canvas>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

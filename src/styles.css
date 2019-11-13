@@ -48,6 +48,13 @@ h1 {
     padding: 0.5em;
 }
 
+.col-30 {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+}
+
 .col-100.menu {
     align-items: center;
 }
@@ -64,6 +71,20 @@ h1 {
 
 .col-100.title p span {
     font-size: 0.6em;
+}
+
+.grafico {
+    margin: 1em;
+    padding: 1em;
+    border-radius: 0.5em;
+    background: linear-gradient(to left, #141e30, #243b55);
+    box-shadow: -2px 2px 4px #141e30;
+}
+
+.grafico p {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 0.5em;
 }
 
 /* Botones */
