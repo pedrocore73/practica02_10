@@ -13,7 +13,7 @@ export class UsocpuService {
   constructor(private http: HttpClient) { }
 
   getUsoCpu() {
-    return this.http.get(this.urlUsoCpu)
+    return this.http.get(this.urlUsoCpu + '/cpulasthour')
                   .pipe(
                     map((res:any)=>{
                       return res;
