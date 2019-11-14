@@ -13,6 +13,12 @@
                     <canvas style="width: 1000px; height: 1000px" id="grafico1">{{chartLastUsoCpu}}</canvas>
                 </div>
             </div>
+            <div class="col-70">
+                <div class="grafico" *ngIf="chartLastHourUsoCpu">
+                    <p>Uso CPU última hora</p>
+                    <canvas id="grafico2">{{chartLastHourUsoCpu}}</canvas>
+                </div>
+            </div>
         </div>
     </div>
 </div>
