@@ -22,4 +22,13 @@ export class UsocpuService {
                   
   }
 
+  getUsoCpuRT() {
+    return this.http.get(this.urlUsoCpu + '/cpulastminute')
+                  .pipe(
+                    map((res:any)=>{
+                      return res;
+                    })
+                  )
+  }
+
 }

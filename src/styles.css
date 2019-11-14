@@ -17,6 +17,31 @@ h1 {
     font-family: 'Oswald', sans-serif;
 }
 
+.m-l-s {
+    margin-left: 0.5em;
+}
+
+.m-r-s {
+    margin-right: 0.5em;
+}
+
+.m-l-l {
+    margin-left: 1em;
+}
+
+.m-r-l {
+    margin-right: 1em;
+}
+
+
+.m-l-xl {
+    margin-left: 1.5em;
+}
+
+.m-r-xl {
+    margin-right: 1.5em;
+}
+
 /* Layout */
 
 .back {

@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EquipoService } from 'src/app/servicios/equipo.service';
 import { UsocpuService } from 'src/app/servicios/usocpu.service';
 import { Chart } from 'chart.js';
 import { RedondeoService } from 'src/app/servicios/redondeo.service';
 
 @Component({
-  selector: 'app-cpu-lasthour',
-  templateUrl: './cpu-lasthour.component.html',
-  styleUrls: ['./cpu-lasthour.component.css']
+  selector: 'app-cpu-lastminute',
+  templateUrl: './cpu-lastminute.component.html',
+  styleUrls: ['./cpu-lastminute.component.css']
 })
-export class CpuLasthourComponent implements OnInit {
+export class CpuLastminuteComponent implements OnInit, OnDestroy {
 
   chartOptions = { responsive: true };
 
   equipo = {};
-  cpulasthour: any;
+  cpulastminute: any;
   percentLastUsoCpu: number;
   chartLastUsoCpu:any = [];
-  chartLastHourUsoCpu:any = [];
+  chartLastMinuteUsoCpu:any = [];
 
-  // camelCase // DobleCamelCase // snake_case // wTfckCaSe :)
+  timer: any;
 
   constructor(private equipoService: EquipoService,
               private usocpuService: UsocpuService,
@@ -27,21 +27,32 @@ export class CpuLasthourComponent implements OnInit {
 
   ngOnInit() {
     this.equipoService.getEquipo()
-                  .subscribe((res:any)=>{
-                    this.equipo = res;
-                    console.log(this.equipo);
-                  },(err:any)=>{
-                    console.log(err);
-                  })
-    this.usocpuService.getUsoCpu()
-                  .subscribe((res:any)=>{
-                      this.cpulasthour = res.cpulasthour;
-                      this.percentLastUsoCpu = this.cpulasthour[0].regUsoCpu * 100;
-                      this.loadLastUsoCpu();
-                      this.loadLastHourUsoCpu();
-                    },(err:any)=>{
-                      console.log(err);
-                    })
+            .subscribe((res:any)=>{
+              this.equipo = res;
+              console.log(this.equipo);
+            },(err:any)=>{
+              console.log(err);
+            })
+    this.usocpuService.getUsoCpuRT()
+            .subscribe((res:any)=>{
+                this.cpulastminute = res.cpulastminute;
+                this.percentLastUsoCpu = this.cpulastminute[0].regUsoCpu * 100;
+                this.loadLastUsoCpu();
+                this.loadLastMinuteUsoCpu();
+              },(err:any)=>{
+                console.log(err);
+              }) 
+    this.timer = setInterval(()=>{
+      this.usocpuService.getUsoCpuRT()
+      .subscribe((res:any)=>{
+          this.cpulastminute = res.cpulastminute;
+          this.percentLastUsoCpu = this.cpulastminute[0].regUsoCpu * 100;
+          this.loadLastUsoCpu();
+          this.loadLastMinuteUsoCpu();
+        },(err:any)=>{
+          console.log(err);
+        }) 
+    }, 1000)       
   }
 
   loadLastUsoCpu() {
@@ -55,7 +66,7 @@ export class CpuLasthourComponent implements OnInit {
     } else {
       color = '#28a745';
     }
-    this.chartLastUsoCpu = new Chart('grafico1', {
+    this.chartLastUsoCpu = new Chart('grafico3', {
       type: 'pie',
       data: {
         labels: ['en uso', 'libre'],
@@ -79,20 +90,20 @@ export class CpuLasthourComponent implements OnInit {
     })
   }
 
-  loadLastHourUsoCpu() {
-    let horas = [];
+  loadLastMinuteUsoCpu() {
+    let minutos = [];
     let usosCPU = [];
-    this.cpulasthour.forEach((registro)=>{
-      horas.push( ('0' + new Date(registro.fecha).getHours()).slice(-2) + ':' 
-                    +  ('0' + new Date(registro.fecha).getMinutes()).slice(-2));
+    this.cpulastminute.forEach((registro)=>{
+      minutos.push( ('0' + new Date(registro.fecha).getMinutes()).slice(-2) + "' " 
+                    +  ('0' + new Date(registro.fecha).getSeconds()).slice(-2)) + "''";
       usosCPU.push(this.redondeoService.getRedond(registro.regUsoCpu * 100, 2));              
     })
-    horas.reverse();
+    minutos.reverse();
     usosCPU.reverse();
-    this.chartLastHourUsoCpu = new Chart('grafico2', {
+    this.chartLastMinuteUsoCpu = new Chart('grafico4', {
       type: 'line',
       data: {
-        labels: horas,
+        labels: minutos,
         datasets: [
           {
             data: usosCPU,
@@ -119,6 +130,10 @@ export class CpuLasthourComponent implements OnInit {
         }
       }
     })
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.timer);
   }
 
 }

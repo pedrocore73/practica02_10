@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { CpuLasthourComponent } from './cpu/cpu-lasthour/cpu-lasthour.component';
+import { CpuLastminuteComponent } from './cpu/cpu-lastminute/cpu-lastminute.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
-    CpuLasthourComponent
+    CpuLasthourComponent,
+    CpuLastminuteComponent
   ],
   imports: [
     BrowserModule,
